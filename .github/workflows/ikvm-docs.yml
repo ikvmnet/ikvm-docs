@@ -22,6 +22,15 @@ jobs:
     steps:
       - name: Checkout Source
         uses: actions/checkout@v2
+      - name: Download IKVM
+        uses: dsaltares/fetch-gh-release-asset@master
+        with:
+          repo: 'ikvmnet/ikvm'
+          file: 'doc.zip'
+          target: content/ikvm.zip
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Extract IKVM
+        run: unzip content/ikvm.zip -d content
       - name: Install
         run: npm install
       - name: Generate
