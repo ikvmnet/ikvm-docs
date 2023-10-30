@@ -23,6 +23,7 @@ jobs:
       - name: Checkout Source
         uses: actions/checkout@v2
       - name: Download ikvm
+        continue-on-error: true
         uses: dsaltares/fetch-gh-release-asset@master
         with:
           repo: "ikvmnet/ikvm"
@@ -30,8 +31,10 @@ jobs:
           target: ${{ runner.temp }}/ikvm.zip
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Extract IKVM
+        continue-on-error: true
         run: unzip ${{ runner.temp }}/ikvm.zip -d content/32.ikvm
       - name: Download ikvm-maven
+        continue-on-error: true
         uses: dsaltares/fetch-gh-release-asset@master
         with:
           repo: "ikvmnet/ikvm-maven"
@@ -39,6 +42,7 @@ jobs:
           target: ${{ runner.temp }}/ikvm-maven.zip
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Extract ikvm-maven
+        continue-on-error: true
         run: unzip ${{ runner.temp }}/ikvm-maven.zip -d content/33.ikvm-maven
       - name: Install
         run: npm install
