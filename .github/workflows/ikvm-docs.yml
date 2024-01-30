@@ -28,22 +28,22 @@ jobs:
         with:
           repo: "ikvmnet/ikvm"
           file: "doc.zip"
-          target: content/ikvm.zip
+          target: ${{ runner.temp }}/ikvm.zip
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Extract IKVM
         continue-on-error: true
-        run: unzip content/1.doc/ikvm.zip -d content/1.doc/32.ikvm
+        run: unzip ${{ runner.temp }}/ikvm.zip -d content/32.ikvm
       - name: Download ikvm-maven
         continue-on-error: true
         uses: dsaltares/fetch-gh-release-asset@master
         with:
           repo: "ikvmnet/ikvm-maven"
           file: "doc.zip"
-          target: content/1.doc/ikvm-maven.zip
+          target: ${{ runner.temp }}/ikvm-maven.zip
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Extract ikvm-maven
         continue-on-error: true
-        run: unzip content/1.doc/ikvm-maven.zip -d content/1.doc/33.ikvm-maven
+        run: unzip ${{ runner.temp }}/ikvm-maven.zip -d content/33.ikvm-maven
       - name: Install
         run: npm install
       - name: Generate
